@@ -37,7 +37,17 @@ class Template
     <link href='http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css' rel='stylesheet'>
 <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
 <link href='assets/css/themify-icons.css' rel='stylesheet'>
+";
+//       <!-- session_start();
+//        if ((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == true)) {
+//            unset($_SESSION['login']);
+//            unset($_SESSION['senha']);
+//            header('location:login.php');
+//        }
+//        $logado = $_SESSION['login'];
 
+
+        echo"
 </head>
 <body>";
 
@@ -80,10 +90,106 @@ class Template
 
     function sidebar()
     {
-        echo "</i>
+        echo "<div class=\"wrapper\">
+        <div class=\"sidebar\" data-background-color=\"white\" data-active-color=\"danger\">
+
+        <!--
+            Tip 1: you can change the color of the sidebar's background using: data-background-color=\"white | black\"
+            Tip 2: you can change the color of the active button using the data-active-color=\"primary | info | success | warning | danger\"
+        -->
+
+        <div class=\"sidebar-wrapper\">
+            <div class=\"logo\">
+                <img src=\"assets/img/logo.png\" height=\"150\" width=\"200\">
+                <h4>EconomiC Analyzer</h4>
+            </div>
+
+            <ul class=\"nav\">
+                <li class=\"active\">
+                    <a href=\"dashboard.php\">
+                        <i class=\"ti-panel\"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href=\"beneficiaries.php\">
+                        <i class=\"ti-user\"></i>
+                        <p>Beneficiaries</p>
+                    </a>
+                </li>
+                <li>
+                    <a href=\"file.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>Relatorio</p>
+                    </a>
+                </li>
+                <li>
+                    <a href=\"program.php\">
+                        <i class=\"ti-view-list-alt\"></i>
                         <p>Programs</p>
                     </a>
                 </li>
+                
+                 <li>
+                    <a href=\"action.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>Action</p>
+                    </a>
+                </li>
+                
+                 <!--  <li>
+                    <a href=\"city.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>City</p>
+                    </a>
+                </li>
+                -->
+             <!--      <li>
+                    <a href=\"files.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>Files</p>
+                    </a>
+                </li>-->
+                
+                   <li>
+                    <a href=\"function.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>Functions</p>
+                    </a>
+                </li>
+                   <li>
+                    <a href=\"payments.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>Payments</p>
+                    </a>
+                </li>
+                 <!--  <li>
+                    <a href=\"region.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>Region</p>
+                    </a>
+                </li>-->
+                   <li>
+                    <a href=\"source.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>Source</p>
+                    </a>
+                </li>
+            <!--       <li>
+                    <a href=\"state.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>State</p>
+                    </a>
+                </li>-->
+                   <li>
+                    <a href=\"subfunction.php\">
+                        <i class=\"ti-view-list-alt\"></i>
+                        <p>Subfunction</p>
+                    </a>
+                </li>
+                
+                
+                
             </ul>
         </div>
     </div>";
