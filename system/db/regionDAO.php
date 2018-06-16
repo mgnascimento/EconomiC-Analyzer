@@ -36,11 +36,11 @@ class regionDAO
 
             if ($region->getIdRegion() != "") {
                 $statement = $pdo->prepare("UPDATE tb_region SET str_name_region=:name_region WHERE id_region = :id_region;");
-                $statement->bindValue(":id_action", $region->getIdRegion());
+                $statement->bindValue(":id_region", $region->getIdRegion());
             } else {
                 $statement = $pdo->prepare("INSERT INTO tb_region (str_name_region) VALUES (:name_region)");
             }
-            $statement->bindValue(":name_action", $region->getNameRegion());
+            $statement->bindValue(":name_region", $region->getNameRegion());
 
             if ($statement->execute()) {
                 if ($statement->rowCount() > 0) {

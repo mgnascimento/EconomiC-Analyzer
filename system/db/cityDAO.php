@@ -1,24 +1,23 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Maria Gabriela
- * Date: 10/05/2018
- * Time: 10:45
+ * User: luhci
+ * Date: 09/06/2018
+ * Time: 22:14
  */
-
 require_once "conexao.php";
-require_once "classes/beneficiaries.php";
+require_once "classes/city.php";
 
-class beneficiariesDAO
+class cityDAO
 {
-    public function remover ($bene)
+    public function remover ($city)
     {
         //classe global q conecta com o banco
         global $pdo;
         try {
             //preparação para execução da query sql
-            $statement = $pdo->prepare("DELETE FROM tb_beneficiaries WHERE id_beneficiaries = :id_beneficiaries");
-            $statement->bindValue(":id_beneficiaries", $bene->getIdBeneficiaries());
+            $statement = $pdo->prepare("DELETE FROM tb_city WHERE id_city = :id_city");
+            $statement->bindValue(":id_city", $city->getIdCity());
             if ($statement->execute()) {
                 return "Registo foi excluído com êxito";
             } else {
@@ -29,19 +28,21 @@ class beneficiariesDAO
         }
     }
 
-    public function salvar($bene)
+    public function salvar($city)
     {
         global $pdo;
         try {
 
-            if ($bene->getIdBeneficiaries() != "") {
-                $statement = $pdo->prepare("UPDATE tb_beneficiaries SET str_nis=:nis, str_name_person =:name_person WHERE id_beneficiaries = :id_beneficiaries;");
-                $statement->bindValue(":id_beneficiaries", $bene->getIdBeneficiaries());
+            if ($city->getIdCity() != "") {
+                $statement = $pdo->prepare("UPDATE tb_city SET  str_name_city=:name_city, str_cod_siafi_city=:cod_siafi_city, tb_state_id_state=:id_state WHERE id_city = :id_city;");
+                $statement->bindValue(":id_city", $city->getIdCity());
             } else {
-                $statement = $pdo->prepare("INSERT INTO tb_beneficiaries (str_nis, str_name_person) VALUES (:nis, :name_person)");
+                $statement = $pdo->prepare("INSERT INTO tb_city (str_name_city, str_cod_siafi_city, tb_state_id_state) VALUES (:id_city, :name_city, :cod_siafi_city, :id_state)");
             }
-            $statement->bindValue(":nis", $bene->getNis());
-            $statement->bindValue(":name_person", $bene->getNamePerson());
+            $statement->bindValue(":id_city", $city->getIdCity());
+            $statement->bindValue(":name_city", $city->getNameCity());
+            $statement->bindValue(":cod_siafi_city", $city->getCodSiafiCity());
+            $statement->bindValue(":id_state", $city->getStateIdState());
 
             if ($statement->execute()) {
                 if ($statement->rowCount() > 0) {
@@ -57,18 +58,19 @@ class beneficiariesDAO
         }
     }
 
-    public function atualizar($beneficiaries){
+    public function atualizar($city){
         global $pdo;
         try {
-            $statement = $pdo->prepare("SELECT id_beneficiaries, str_nis, str_name_person FROM tb_beneficiaries WHERE id_beneficiaries = :id_beneficiaries");
-            $statement->bindValue(":id_beneficiaries", $beneficiaries->getIdBeneficiaries());
+            $statement = $pdo->prepare("SELECT id_city, str_name_city, str_cod_siafi_city, tb_state_id_state,  FROM tb_city WHERE id_city = :id_city");
+            $statement->bindValue(":id_city", $city->getIdCity());
             if ($statement->execute()) {
                 $rs = $statement->fetch(PDO::FETCH_OBJ);
-                $beneficiaries->setIdBeneficiaries($rs->id_beneficiaries);
-                $beneficiaries->setNis($rs->str_nis);
-                $beneficiaries->setNamePerson($rs->str_name_person);
+                $city->setIdCity($rs->id_city);
+                $city->setNameCity($rs->str_name_city);
+                $city->setCodSiafiCity($rs->str_cod_siafi_city);
+                $city->setStateIdState($rs->tb_state_id_state);
 
-                return $beneficiaries;
+                return $city;
             } else {
                 throw new PDOException("Erro: Não foi possível executar a declaração sql");
             }
@@ -96,13 +98,13 @@ class beneficiariesDAO
         $linha_inicial = ($pagina_atual -1) * QTDE_REGISTROS;
 
         /* Instrução de consulta para paginação com MySQL */
-        $sql = "SELECT id_beneficiaries, str_nis, str_name_person FROM tb_beneficiaries LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
+        $sql = "SELECT id_city, str_name_city, str_cod_siafi_city, tb_state_id_state FROM tb_city LIMIT {$linha_inicial}, " . QTDE_REGISTROS;
         $statement = $pdo->prepare($sql);
         $statement->execute();
         $dados = $statement->fetchAll(PDO::FETCH_OBJ);
 
         /* Conta quantos registos existem na tabela */
-        $sqlContador = "SELECT COUNT(*) AS total_registros FROM tb_beneficiaries";
+        $sqlContador = "SELECT COUNT(*) AS total_registros FROM tb_city";
         $statement = $pdo->prepare($sqlContador);
         $statement->execute();
         $valor = $statement->fetch(PDO::FETCH_OBJ);
@@ -136,20 +138,24 @@ class beneficiariesDAO
      <table class='table table-striped table-bordered'>
      <thead>
        <tr class='active'>
-        <th>Código</th>
-        <th>NIS</th>
+        <th>Id</th>
         <th>Nome</th>
-        <th colspan='2'>Beneficiaries</th>
+        <th>Código</th>
+        <th>Estado</th>
+        
+        <th colspan='2'>Ações</th>
        </tr>
      </thead>
      <tbody>";
             foreach($dados as $inst):
                 echo "<tr>
-        <td>$inst->id_beneficiaries</td>
-        <td>$inst->str_nis</td>
-        <td>$inst->str_name_person</td>
-        <td><a href='?act=upd&id_beneficiaries=$inst->id_beneficiaries'><i class='ti-reload'></i></a></td>
-        <td><a href='?act=del&id_beneficiaries=$inst->id_beneficiaries'><i class='ti-close'></i></a></td>
+        <td>$inst->id_city</td>
+        <td>$inst->str_name_city</td>
+        <td>$inst->str_cod_siafi_city</td>
+        <td>$inst->tb_state_id_state</td>
+        
+        <td><a href='?act=upd&id_city=$inst->id_city'><i class='ti-reload'></i></a></td>
+        <td><a href='?act=del&id_city=$inst->id_city'><i class='ti-close'></i></a></td>
        </tr>";
             endforeach;
             echo"
@@ -176,10 +182,5 @@ class beneficiariesDAO
         endif;
 
     }
-
-
-
-
-
 
 }

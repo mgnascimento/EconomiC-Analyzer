@@ -66,8 +66,8 @@ class functionDAO
             if ($statement->execute()) {
                 $rs = $statement->fetch(PDO::FETCH_OBJ);
                 $f->setIdFunction($rs->id_function);
-                $f>setCodFunction($rs->cod_function);
-                $f>setNameFunction($rs->name_function);
+                $f->setCodFunction($rs->str_cod_function);
+                $f->setNameFunction($rs->str_name_function);
 
                 return $f;
             } else {
@@ -147,10 +147,10 @@ class functionDAO
             foreach($dados as $inst):
                 echo "<tr>
         <td>$inst->id_function</td>
-        <td>$inst->cod_function</td>
-        <td>$inst->name_function</td>
-        <td><a href='?act=upd&id=$inst->id_function'><i class='ti-reload'></i></a></td>
-        <td><a href='?act=del&id=$inst->id_function'><i class='ti-close'></i></a></td>
+        <td>$inst->str_cod_function</td>
+        <td>$inst->str_name_function</td>
+        <td><a href='?act=upd&id_function=$inst->id_function'><i class='ti-reload'></i></a></td>
+        <td><a href='?act=del&id_function=$inst->id_function'><i class='ti-close'></i></a></td>
        </tr>";
             endforeach;
             echo"

@@ -68,8 +68,8 @@ class filesDAO
                 $rs = $statement->fetch(PDO::FETCH_OBJ);
                 $files->getIdFiles($rs->id_files);
                 $files->getNameFiles($rs->name_file);
-                $files>getMonth($rs->month);
-                $files>getYear($rs->year);
+                $files->getMonth($rs->month);
+                $files->getYear($rs->year);
 
                 return $files;
             } else {

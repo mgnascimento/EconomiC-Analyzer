@@ -64,9 +64,9 @@ class subfunctionDAO
             $statement->bindValue(":id_subfunction", $sub->getSubfunction());
             if ($statement->execute()) {
                 $rs = $statement->fetch(PDO::FETCH_OBJ);
-                $sub->getSubfunction($rs->id_subfunction);
-                $sub>getCodSubfunction($rs->cod_subfunction);
-                $sub>getNameSubfunction($rs->name_subfunction);
+                $sub->setSubfunction($rs->id_subfunction);
+                $sub->setCodSubfunction($rs->str_cod_subfunction);
+                $sub->setNameSubfunction($rs->str_name_subfunction);
 
                 return $sub;
             } else {
@@ -146,10 +146,10 @@ class subfunctionDAO
             foreach($dados as $inst):
                 echo "<tr>
         <td>$inst->id_subfunction</td>
-        <td>$inst->cod_subfunction</td>
-        <td>$inst->name_subfunction</td>
-        <td><a href='?act=upd&id=$inst->id_subfunction'><i class='ti-reload'></i></a></td>
-        <td><a href='?act=del&id=$inst->id_subfunction'><i class='ti-close'></i></a></td>
+        <td>$inst->str_cod_subfunction</td>
+        <td>$inst->str_name_subfunction</td>
+        <td><a href='?act=upd&id_subfunction=$inst->id_subfunction'><i class='ti-reload'></i></a></td>
+        <td><a href='?act=del&id_subfunction=$inst->id_subfunction'><i class='ti-close'></i></a></td>
        </tr>";
             endforeach;
             echo"

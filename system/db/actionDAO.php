@@ -62,12 +62,12 @@ class actionDAO
         global $pdo;
         try {
             $statement = $pdo->prepare("SELECT id_action, str_cod_action, str_name_action FROM tb_action WHERE id_action = :id_action");
-            $statement->bindValue(":id", $action->getIdAction());
+            $statement->bindValue(":id_action", $action->getIdAction());
             if ($statement->execute()) {
                 $rs = $statement->fetch(PDO::FETCH_OBJ);
                 $action->setIdAction($rs->id_action);
-                $action>setCodAction($rs->cod_action);
-                $action>setNameAction($rs->name_action);
+                $action->setCodAction($rs->str_cod_action);
+                $action->setNameAction($rs->str_name_action);
 
                 return $action;
             } else {
@@ -147,10 +147,10 @@ class actionDAO
             foreach($dados as $inst):
                 echo "<tr>
         <td>$inst->id_action</td>
-        <td>$inst->cod_action</td>
-        <td>$inst->name_action</td>
-        <td><a href='?act=upd&id=$inst->id_action'><i class='ti-reload'></i></a></td>
-        <td><a href='?act=del&id=$inst->id_action'><i class='ti-close'></i></a></td>
+        <td>$inst->str_cod_action</td>
+        <td>$inst->str_name_action</td>
+        <td><a href='?act=upd&id_action=$inst->id_action'><i class='ti-reload'></i></a></td>
+        <td><a href='?act=del&id_action=$inst->id_action'><i class='ti-close'></i></a></td>
        </tr>";
             endforeach;
             echo"
