@@ -12,7 +12,7 @@ class city
     private $id_city;
     private $name_city;
     private $cod_siafi_city;
-    private $stade_id_state;
+    private $state_id_state;
 
     /**
      * city constructor.
@@ -21,12 +21,12 @@ class city
      * @param $cod_siafi_city
      * @param $stade_id_state
      */
-    public function __construct($id_city, $name_city, $cod_siafi_city, $stade_id_state)
+    public function __construct($id_city, $name_city, $cod_siafi_city, $state_id_state)
     {
         $this->id_city = $id_city;
         $this->name_city = $name_city;
         $this->cod_siafi_city = $cod_siafi_city;
-        $this->stade_id_state = $stade_id_state;
+        $this->stade_id_state = $state_id_state;
     }
 
     /**
@@ -80,17 +80,17 @@ class city
     /**
      * @return mixed
      */
-    public function getStadeIdState()
+    public function getStateIdState()
     {
-        return $this->stade_id_state;
+        return $this->state_id_state;
     }
 
     /**
      * @param mixed $stade_id_state
      */
-    public function setStadeIdState($stade_id_state)
+    public function setStateIdState($state_id_state)
     {
-        $this->stade_id_state = $stade_id_state;
+        $this->state_id_state = $state_id_state;
     }
 
 

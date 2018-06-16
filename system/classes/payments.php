@@ -18,6 +18,8 @@ class payments
     private $beneficiaries_id_beneficiaries;
     private $source_id_source;
     private $files_id_files;
+    private $month;
+    private $year;
     private $value;
 
     /**
@@ -31,9 +33,11 @@ class payments
      * @param $beneficiaries_id_beneficiaries
      * @param $source_id_source
      * @param $files_id_files
+     * @param $month
+     * @param $year
      * @param $value
      */
-    public function __construct($id_payment, $city_id_city, $functions_id_function, $subfunctions_id_subfunction, $program_id_program, $action_id_action, $beneficiaries_id_beneficiaries, $source_id_source, $files_id_files, $value)
+    public function __construct($id_payment, $city_id_city, $functions_id_function, $subfunctions_id_subfunction, $program_id_program, $action_id_action, $beneficiaries_id_beneficiaries, $source_id_source, $files_id_files, $month, $year, $value)
     {
         $this->id_payment = $id_payment;
         $this->city_id_city = $city_id_city;
@@ -44,6 +48,8 @@ class payments
         $this->beneficiaries_id_beneficiaries = $beneficiaries_id_beneficiaries;
         $this->source_id_source = $source_id_source;
         $this->files_id_files = $files_id_files;
+        $this->month = $month;
+        $this->year = $year;
         $this->value = $value;
     }
 
@@ -194,6 +200,38 @@ class payments
     /**
      * @return mixed
      */
+    public function getMonth()
+    {
+        return $this->month;
+    }
+
+    /**
+     * @param mixed $month
+     */
+    public function setMonth($month)
+    {
+        $this->month = $month;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * @param mixed $year
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->value;
@@ -206,7 +244,5 @@ class payments
     {
         $this->value = $value;
     }
-
-
 
 }

@@ -13,7 +13,7 @@ class beneficiaries
     private $name_person;
 
     /**
-     * beneficiaries constructor.
+     * beneficiaries.php constructor.
      * @param $id_beneficiaries
      * @param $nis
      * @param $name_person
